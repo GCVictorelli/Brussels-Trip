@@ -22,7 +22,9 @@ import {
   ExternalLink,
   ChevronRight,
   Wallet,
-  Smartphone
+  Smartphone,
+  CheckCircle2,
+  Circle
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -55,6 +57,12 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState<"17" | "18" | "19">("17");
   const [activeTab, setActiveTab] = useState<"timeline" | "mobility" | "costs">("timeline");
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+
+  const toggleCheck = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCheckedItems(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const dates = [
     { id: "17", label: "Sex, 17 Abr" },
@@ -150,6 +158,7 @@ export default function App() {
                   {timelineData[selectedDate].map((item, index) => {
                     const Icon = iconMap[item.icon] || MapPin;
                     const isExpanded = expandedItem === item.id;
+                    const isChecked = checkedItems[item.id];
 
                     return (
                       <motion.div 
@@ -160,8 +169,8 @@ export default function App() {
                         className="relative pl-6"
                       >
                         {/* Timeline Dot */}
-                        <div className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-[#f5f5f7] border-2 border-blue-500 flex items-center justify-center">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                        <div className={cn("absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-[#f5f5f7] border-2 flex items-center justify-center transition-colors", isChecked ? "border-gray-400" : "border-blue-500")}>
+                          <div className={cn("w-1.5 h-1.5 rounded-full transition-colors", isChecked ? "bg-gray-400" : "bg-blue-500")} />
                         </div>
 
                         {/* Card */}
@@ -169,22 +178,33 @@ export default function App() {
                           onClick={() => setExpandedItem(isExpanded ? null : item.id)}
                           className={cn(
                             "w-full text-left p-5 rounded-3xl border transition-all duration-300",
-                            "bg-white/70 backdrop-blur-xl hover:bg-white/90",
-                            isExpanded ? "border-blue-200 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)]" : "border-white/60 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.05)]"
+                            isChecked 
+                              ? "bg-gray-800 border-gray-700 text-gray-300 shadow-inner" 
+                              : isExpanded 
+                                ? "bg-white/90 border-blue-200 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] text-gray-900" 
+                                : "bg-white/70 border-white/60 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.05)] hover:bg-white/90 backdrop-blur-xl text-gray-900"
                           )}
                         >
                           <div className="flex justify-between items-start gap-4">
                             <div className="flex gap-4 items-start">
-                              <div className="p-3 rounded-2xl bg-blue-50 text-blue-500">
+                              <div className={cn("p-3 rounded-2xl transition-colors", isChecked ? "bg-gray-700 text-gray-400" : "bg-blue-50 text-blue-500")}>
                                 <Icon className="w-5 h-5" />
                               </div>
                               <div>
-                                <span className="text-xs font-bold tracking-wider text-blue-500 uppercase">{item.time}</span>
-                                <h3 className="text-lg font-semibold text-gray-900 mt-1 leading-tight">{item.title}</h3>
-                                <p className="text-sm text-gray-500 mt-1">{item.type}</p>
+                                <span className={cn("text-xs font-bold tracking-wider uppercase transition-colors", isChecked ? "text-gray-500" : "text-blue-500")}>{item.time}</span>
+                                <h3 className={cn("text-lg font-semibold mt-1 leading-tight transition-colors", isChecked ? "text-gray-400 line-through" : "text-gray-900")}>{item.title}</h3>
+                                <p className={cn("text-sm mt-1", isChecked ? "text-gray-500" : "text-gray-500")}>{item.type}</p>
                               </div>
                             </div>
-                            <ChevronRight className={cn("w-5 h-5 text-gray-400 transition-transform duration-300", isExpanded && "rotate-90")} />
+                            <div className="flex items-center gap-1">
+                              <div 
+                                onClick={(e) => toggleCheck(item.id, e)}
+                                className={cn("p-2 rounded-full transition-colors", isChecked ? "text-green-400 hover:bg-gray-700" : "text-gray-300 hover:text-gray-500 hover:bg-gray-200/50")}
+                              >
+                                {isChecked ? <CheckCircle2 className="w-6 h-6" /> : <Circle className="w-6 h-6" />}
+                              </div>
+                              <ChevronRight className={cn("w-5 h-5 transition-transform duration-300", isChecked ? "text-gray-600" : "text-gray-400", isExpanded && "rotate-90")} />
+                            </div>
                           </div>
 
                           <AnimatePresence>
@@ -195,18 +215,18 @@ export default function App() {
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden"
                               >
-                                <div className="pt-5 mt-5 border-t border-gray-100 space-y-4">
-                                  <div className="flex items-start gap-3 text-sm text-gray-600">
-                                    <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-gray-400" />
+                                <div className={cn("pt-5 mt-5 border-t space-y-4", isChecked ? "border-gray-700" : "border-gray-100")}>
+                                  <div className={cn("flex items-start gap-3 text-sm", isChecked ? "text-gray-400" : "text-gray-600")}>
+                                    <MapPin className={cn("w-4 h-4 mt-0.5 shrink-0", isChecked ? "text-gray-500" : "text-gray-400")} />
                                     <span>{item.address}</span>
                                   </div>
                                   
-                                  <div className="flex items-start gap-3 text-sm text-gray-600">
-                                    <Wallet className="w-4 h-4 mt-0.5 shrink-0 text-gray-400" />
+                                  <div className={cn("flex items-start gap-3 text-sm", isChecked ? "text-gray-400" : "text-gray-600")}>
+                                    <Wallet className={cn("w-4 h-4 mt-0.5 shrink-0", isChecked ? "text-gray-500" : "text-gray-400")} />
                                     <span>{item.price}</span>
                                   </div>
 
-                                  <div className="p-4 rounded-2xl bg-gray-50/80 border border-gray-100 text-sm text-gray-700 leading-relaxed">
+                                  <div className={cn("p-4 rounded-2xl border text-sm leading-relaxed", isChecked ? "bg-gray-700/50 border-gray-600 text-gray-300" : "bg-gray-50/80 border-gray-100 text-gray-700")}>
                                     {item.notes}
                                   </div>
 
@@ -216,7 +236,7 @@ export default function App() {
                                         href={item.mapLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 text-blue-600 text-sm font-medium hover:bg-blue-100 transition-colors"
+                                        className={cn("inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors", isChecked ? "bg-gray-700 text-blue-400 hover:bg-gray-600" : "bg-blue-50 text-blue-600 hover:bg-blue-100")}
                                         onClick={(e) => e.stopPropagation()}
                                       >
                                         <Map className="w-4 h-4" />
@@ -228,7 +248,7 @@ export default function App() {
                                         href={item.ticketLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors"
+                                        className={cn("inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors", isChecked ? "bg-gray-700 text-gray-300 hover:bg-gray-600" : "bg-gray-100 text-gray-700 hover:bg-gray-200")}
                                         onClick={(e) => e.stopPropagation()}
                                       >
                                         <Ticket className="w-4 h-4" />
