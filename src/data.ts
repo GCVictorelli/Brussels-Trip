@@ -1,0 +1,248 @@
+export type TimelineItem = {
+  id: string;
+  time: string;
+  title: string;
+  address: string;
+  price: string;
+  type: string;
+  notes: string;
+  mapLink?: string;
+  ticketLink?: string;
+  icon: string;
+};
+
+export const timelineData: Record<string, TimelineItem[]> = {
+  "17": [
+    {
+      id: "17-1",
+      time: "11:30",
+      title: "Check-in Hotel",
+      address: "Bd du Jardin Botanique 25",
+      price: "-",
+      type: "Hotel",
+      notes: "Deixar as malas no The Standard.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=The+Standard+Brussels+Bd+du+Jardin+Botanique+25",
+      icon: "Hotel",
+    },
+    {
+      id: "17-2",
+      time: "12:30",
+      title: "Piquenique / Mercado",
+      address: "Carrefour Express (Centro)",
+      price: "€ 10",
+      type: "Almoço",
+      notes: "Comprar sanduíches/saladas e comer na praça.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Carrefour+Express+Brussels+Center",
+      icon: "ShoppingBag",
+    },
+    {
+      id: "17-3",
+      time: "13:30",
+      title: "Tour Histórico",
+      address: "Grand Place / Sablon",
+      price: "Grátis",
+      type: "Turismo",
+      notes: "Grand Place, Manneken Pis e Igrejas.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Grand+Place+Brussels",
+      icon: "Map",
+    },
+    {
+      id: "17-4",
+      time: "16:30",
+      title: "Museu Magritte",
+      address: "Rue de la Régence 3",
+      price: "€ 12",
+      type: "Cultura",
+      notes: "Compre online. Se tiver <26 anos, custa €3.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Museu+Magritte+Brussels",
+      ticketLink: "https://musee-magritte-museum.be/en",
+      icon: "Palette",
+    },
+    {
+      id: "17-5",
+      time: "20:00",
+      title: "Restaurante 1 (Wolf)",
+      address: "Rue de Fossé aux Loups 50",
+      price: "€ 25",
+      type: "Jantar",
+      notes: "Mercado gastronômico com várias opções.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Wolf+Sharing+Food+Market+Brussels",
+      icon: "Utensils",
+    },
+    {
+      id: "17-6",
+      time: "23:00",
+      title: "Festa Ginette Club",
+      address: "[logroup.be]",
+      price: "€ 15",
+      type: "Festa",
+      notes: "Cheguem cedo. Estacionamento/Chapelaria à parte.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Ginette+Club+Brussels",
+      ticketLink: "https://logroup.be",
+      icon: "Music",
+    },
+  ],
+  "18": [
+    {
+      id: "18-1",
+      time: "10:00",
+      title: "Café da Manhã Farto",
+      address: "No Hotel",
+      price: "Grátis",
+      type: "Refeição",
+      notes: "Comam bem para aguentar até o final da tarde.",
+      icon: "Coffee",
+    },
+    {
+      id: "18-2",
+      time: "11:30",
+      title: "Caminhada Marolles",
+      address: "Place du Jeu de Balle",
+      price: "Grátis",
+      type: "Lazer",
+      notes: "Mercado de pulgas e vibe local histórica.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Place+du+Jeu+de+Balle+Brussels",
+      icon: "Footprints",
+    },
+    {
+      id: "18-3",
+      time: "14:00",
+      title: "Flixbus para Gante",
+      address: "Gare du Nord (Bruxelas)",
+      price: "€ 6",
+      type: "Transporte",
+      notes: "Comprar com antecedência no app Flixbus.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Gare+du+Nord+Brussels",
+      ticketLink: "https://www.flixbus.com",
+      icon: "Bus",
+    },
+    {
+      id: "18-4",
+      time: "15:00",
+      title: "Centro Histórico Gante",
+      address: "Graslei, Gante",
+      price: "Grátis",
+      type: "Turismo",
+      notes: "Canais e arquitetura medieval (visita externa).",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Graslei+Ghent",
+      icon: "Castle",
+    },
+    {
+      id: "18-5",
+      time: "17:30",
+      title: "Restaurante 2 (Gante)",
+      address: "Centro de Gante",
+      price: "€ 25",
+      type: "Jantar",
+      notes: "Jantar cedo para garantir o ônibus de volta.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Ghent+Center+Restaurants",
+      icon: "Utensils",
+    },
+    {
+      id: "18-6",
+      time: "19:15",
+      title: "Flixbus para Bruxelas",
+      address: "Ghent (Dampoort)",
+      price: "€ 6",
+      type: "Transporte",
+      notes: "Retorno para se arrumar no hotel.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Ghent+Dampoort+Station",
+      ticketLink: "https://www.flixbus.com",
+      icon: "Bus",
+    },
+    {
+      id: "18-7",
+      time: "23:30",
+      title: "The Agenda BXL",
+      address: "Rue des Plateaux 22",
+      price: "Grátis*",
+      type: "Festa",
+      notes: "Verifique o site; eventos costumam ter entrada livre.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=The+Agenda+BXL+Rue+des+Plateaux+22",
+      icon: "PartyPopper",
+    },
+  ],
+  "19": [
+    {
+      id: "19-0a",
+      time: "09:00",
+      title: "Café da Manhã",
+      address: "The Standard Hotel",
+      price: "Variável",
+      type: "Refeição",
+      notes: "Café da manhã no hotel.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=The+Standard+Brussels+Bd+du+Jardin+Botanique+25",
+      icon: "Coffee",
+    },
+    {
+      id: "19-0b",
+      time: "11:00",
+      title: "Checkout no Hotel",
+      address: "The Standard Hotel",
+      price: "-",
+      type: "Hotel",
+      notes: "Finalizar estadia e deixar as malas na recepção.",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=The+Standard+Brussels+Bd+du+Jardin+Botanique+25",
+      icon: "Hotel",
+    },
+    {
+      id: "19-0c",
+      time: "11:30",
+      title: "Passeio pela cidade",
+      address: "Centro de Bruxelas",
+      price: "Grátis",
+      type: "Lazer",
+      notes: "Aproveitar as últimas horas para caminhar e comprar lembrancinhas.",
+      icon: "Footprints",
+    },
+    {
+      id: "19-1",
+      time: "14:00",
+      title: "Saída p/ Aeroporto",
+      address: "Gare du Nord / Central",
+      price: "€ 11",
+      type: "Transporte",
+      notes: "Trem direto ou 'Airport Bus' (Bus 12).",
+      mapLink: "https://www.google.com/maps/search/?api=1&query=Gare+du+Nord+Brussels",
+      icon: "PlaneTakeoff",
+    },
+  ],
+};
+
+export const costsData = [
+  { item: "Restaurantes (2 Refeições)", cost: "€ 50,00" },
+  { item: "Alimentação Econômica", cost: "€ 25,00" },
+  { item: "Bebidas / 'Esquenta'", cost: "€ 25,00" },
+  { item: "Entradas em Festas", cost: "€ 20,00" },
+  { item: "Cultura (Museu)", cost: "€ 12,00" },
+  { item: "Transporte (Gante + Aeroporto)", cost: "€ 18,00" },
+];
+
+export const totalCost = "€ 150,00";
+
+export const mobilityApps = [
+  {
+    name: "STIB-MIVB",
+    description: "Transporte público oficial (Metrô, Tram, Ônibus)",
+    ios: "https://apps.apple.com/us/app/stib-mivb/id1325048789",
+    icon: "Train",
+  },
+  {
+    name: "Uber",
+    description: "Carros particulares",
+    ios: "https://apps.apple.com/app/uber/id368677368",
+    icon: "Car",
+  },
+  {
+    name: "Bolt",
+    description: "Carros e patinetes",
+    ios: "https://apps.apple.com/app/bolt/id675033630",
+    icon: "Zap",
+  },
+  {
+    name: "FlixBus",
+    description: "Ônibus intermunicipais (Bruxelas - Gante)",
+    ios: "https://apps.apple.com/us/app/flixbus-flixtrain/id778437357",
+    icon: "BusFront",
+  }
+];
